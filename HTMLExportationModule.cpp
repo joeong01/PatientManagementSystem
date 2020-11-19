@@ -139,7 +139,6 @@ bool HTMLExportationModule::exportMedicine(){
 	return status;
 }
 
-//haven't complete
 bool HTMLExportationModule::exportDoctor(){
 	bool status = true;
 
@@ -147,12 +146,24 @@ bool HTMLExportationModule::exportDoctor(){
 		ofstream f("doctor.html");
 		if (f) {
 			f << this->htmlStart;
-			f << "<tr><th>Id</th><th>Name</th><th>Age</th><th>Gender</th><th>Address</th><th>Contact</th></tr>";
+			f << "<tr><th>Id</th><th>Name</th><th>Age</th><th>Gender</th><th>Experienced Field</th>";
+			f << "<th>Experienced Year</th><th>Consultation Price</th><th>Consultation Extension</th>";
+			f << "<th>Monthly Salary</th></tr>";
+
 			Node* ptr = doctorList->getHead();
 			while (ptr != nullptr) {
 				Doctor* g = dynamic_cast<Doctor*>(ptr);
-				printf("<tr><td>%d</td><td>%s</td><td>%d</td><td>%c</td><td>%s</td><td>%s</td></tr>",
-					g->getId(), g->getName().c_str(), g->getAge(), g->getGender(), g->getAddress().c_str(), g->getContact().c_str());
+				printf("<tr><td>%d</td><td>%s</td><td>%d</td><td>%c</td><td>%s</td><td>%04d</td><td>%.2f</td><td>%d</td><td>%.2f</td></tr>",
+					g->getId(), 
+					g->getName().c_str(), 
+					g->getAge(), 
+					g->getGender(), 
+					g->getExperience_field().c_str(), 
+					g->getExperience_year(),
+					g->getConsultation_price(),
+					g->getConsultant_extension(),
+					g->getMonthly_salary()
+				);
 				ptr = ptr->getNext();
 			}
 			f << this->htmlEnd;

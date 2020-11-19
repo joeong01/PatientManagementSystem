@@ -1,4 +1,34 @@
 #include "InputModule.h"
+#include <functional>
+
+std::string InputModule::trimFront(std::string& str) {
+	str.erase(str.begin(), 
+		std::find_if(
+			str.begin(), str.end(),
+			std::not1(
+				std::ptr_fun<int, int>(std::isspace)
+			)
+		)
+	);
+	return str;
+}
+
+std::string InputModule::trimBack(std::string& str) {
+	str.erase(std::find_if(
+				str.rbegin(), 
+				str.rend(),
+				std::not1(std::ptr_fun<int, int>(std::isspace))
+			).base(),
+		str.end()
+	);
+
+	return str;
+}
+
+std::string InputModule::trim(std::string& str) {
+	std::string result = trimFront(str);
+	return trimBack(result);
+}
 
 int InputModule::getIntegerInput(std::string prompt){
 	bool valid = false;
@@ -61,6 +91,9 @@ std::string InputModule::getStringInput(std::string prompt) {
 				std::cin.ignore(ignoreSize, '\n');
 				throw "Failed to catch input";
 			}
+			if (trim(input).length() == 0)
+				throw "Input should contain at least one character.";
+
 			std::cin.ignore(ignoreSize, '\n');
 			valid = true;
 		}
@@ -96,7 +129,7 @@ double InputModule::getDoubleInput(std::string prompt) {
 	return input;
 }
 
-std::queue<std::string> InputModule::split_string(std::string input,const char delimiter = ';') {
+std::queue<std::string> InputModule::split_string(std::string input,const char delimiter) {
 	std::queue<std::string> part;
 	int start = 0;
 	int end = 0;

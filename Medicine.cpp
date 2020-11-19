@@ -20,13 +20,16 @@ std::string Medicine::toString() {
 }
 
 void Medicine::print() {
-
+	printf("%-20s\n", name.c_str());
 }
 
 void Medicine::printDetail() {
-
+	cout << "Medicine Id : " << id << endl;
+	cout << "Medicine Name : " << name << endl;
+	cout << "Medicine Price : " << price << endl;
 }
 
 bool Medicine::operator < (Node& tmp) {
-	Medicine& m = dynamic_cast<Medicine&> tmp;
+	Medicine& m = dynamic_cast<Medicine&>(tmp);
+	return this->id < m.id;
 }

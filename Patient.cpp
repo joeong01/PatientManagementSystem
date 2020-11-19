@@ -9,7 +9,7 @@ Patient::Patient(int id, int age, string name, string address, string contact, s
 	this->setContact(contact);
 	this->setDoctorName(doctor_name);
 	this->setInsurance(insurance);
-	this->setMedicineList(medicine);
+	this->setMedicine(medicine);
 }
 
 //body of getter & setter
@@ -41,7 +41,7 @@ string Patient::getMedicine() { return medicine; }
 void Patient::setMedicine(string medicine) { this->medicine = medicine; }
 
 void Patient::print() {
-
+	printf("%-20s|%-20s\n", name.c_str(), address.c_str());
 }
 
 void Patient::printDetail() {

@@ -27,7 +27,7 @@ void MainModule::mainProcess(int input) {
 	switch (input) {
 	case 1:
 	{
-		PatientManagementModule pm(doctorList, patientList, medicineList);
+		PatientManagementModule pm(patientList, guardianList);
 
 		do {
 			pm.printMainMenu();
@@ -38,7 +38,7 @@ void MainModule::mainProcess(int input) {
 	break;
 	case 2:
 	{
-		DoctorManagementModule dm(doctorList, patientList, medicineList);
+		DoctorManagementModule dm(doctorList);
 
 		do {
 			dm.printMainMenu();
@@ -49,7 +49,7 @@ void MainModule::mainProcess(int input) {
 	break;
 	case 3:
 	{
-		MedicineManagementModule mm(doctorList, patientList, medicineList);
+		MedicineManagementModule mm(medicineList);
 
 		do {
 			mm.printMainMenu();
@@ -71,7 +71,7 @@ void MainModule::mainProcess(int input) {
 	break;
 	case 5:
 	{
-		PaymentModule pm(doctorList, patientList, medicineList);
+		PaymentModule pm(patientList, medicineList, doctorList);
 
 		do {
 			pm.printMainMenu();

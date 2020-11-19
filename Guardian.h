@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <typeinfo>
 #include "Printable.h"
 #include "Node.h"
 using namespace std;
@@ -55,17 +54,6 @@ public:
     */
     std::string toString();
 
-    bool operator < (Node& temp){
-        if (typeid(this) != typeid(temp))
-            throw "Input mismatch";
-
-        Guardian g = dynamic_cast<Guardian&>(temp);
-
-        return this->id < g.id;
-    }
-
-    bool operator > (Node& temp) {
-        return !(*this < temp);
-    }
+    bool operator < (Node& temp);
 };
 

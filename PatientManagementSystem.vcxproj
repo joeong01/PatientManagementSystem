@@ -140,22 +140,46 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DiagnosticModule.h" />
+    <ClInclude Include="Doctor.h" />
+    <ClInclude Include="DoctorManagementModule.h" />
     <ClInclude Include="FileManagementModule.h" />
+    <ClInclude Include="Guardian.h" />
+    <ClInclude Include="HTMLExportationModule.h" />
     <ClInclude Include="InputModule.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="MainModule.h" />
+    <ClInclude Include="Medicine.h" />
+    <ClInclude Include="MedicineManagementModule.h" />
     <ClInclude Include="Module.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Patient.h" />
+    <ClInclude Include="PatientManagementModule.h" />
+    <ClInclude Include="Payment.h" />
+    <ClInclude Include="PaymentModule.h" />
     <ClInclude Include="Printable.h" />
+    <ClInclude Include="SearchModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DiagnosticModule.cpp" />
+    <ClCompile Include="Doctor.cpp" />
+    <ClCompile Include="DoctorManagementModule.cpp" />
     <ClCompile Include="FileManagementModule.cpp" />
+    <ClCompile Include="Guardian.cpp" />
+    <ClCompile Include="HTMLExportationModule.cpp" />
     <ClCompile Include="InputModule.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="MainModule.cpp" />
+    <ClCompile Include="Medicine.cpp" />
+    <ClCompile Include="MedicineManagementModule.cpp" />
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Patient.cpp" />
+    <ClCompile Include="PatientManagementModule.cpp" />
     <ClCompile Include="PatientManagementSystem.cpp" />
+    <ClCompile Include="Payment.cpp" />
+    <ClCompile Include="PaymentModule.cpp" />
     <ClCompile Include="Printable.cpp" />
+    <ClCompile Include="SearchModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

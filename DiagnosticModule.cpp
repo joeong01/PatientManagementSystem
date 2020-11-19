@@ -5,121 +5,139 @@ DiagnosticModule::DiagnosticModule(List* dl, List* pl, List* ml)
 {}
 
 void DiagnosticModule::printDoctorList() {
-	using namespace std;
-	string line(50, '-');
-	const int DOCTORSIZE = doctorList->size();
+	Doctor* ptr = nullptr;
+	std::string line(50, '-');
 
-	cout << line << endl;
-	printf("%-5s|%-20s\n", "index", "doctor");
-	cout << line << endl;
-	for (int i = 0; i < DOCTORSIZE; ++i) {
-		Doctor* record = dynamic_cast<Doctor*>(patientList->get(i));
-		printf("%-5d|%-20s\n", i + 1, record->getName());
+	printf("%-10s|%-20s|%-20s\n", "Index", "Doctor Name", "Experienced Field");
+	std::cout << line << std::endl;
+
+	ptr = dynamic_cast<Doctor*>(doctorList->getHead());
+	int index = 1;
+	//use while loop to display until end of doctorList
+	while (ptr != nullptr)
+	{
+		printf("%-10d|", index);
+		ptr->print();
+		ptr = dynamic_cast<Doctor*>(ptr->getNext());
+		++index;
 	}
-	printf("Enter %d to return\n", DOCTORSIZE);
-	cout << line << endl;
+
+	std::cout << line << std::endl;
 }
 
 void DiagnosticModule::printPatientList() {
-	using namespace std;
-	string line(50, '-');
-	const int PATIENTSIZE = patientList->size();
+	Patient* ptr = nullptr;
+	std::string line(50, '-');
 
-	cout << line << endl;
-	printf("%5s|%20s\n", "index", "patient");
-	cout << line << endl;
-	for (int i = 0; i < PATIENTSIZE; ++i) {
-		Patient* record = dynamic_cast<Patient*>(patientList->get(i));
-		printf("%-5d|%-20s\n", i + 1, record->getName());
+	printf("%-10s|%-20s|%-20s\n", "Index", "Patient Name", "Patient Address");
+	std::cout << line << std::endl;
+
+	ptr = dynamic_cast<Patient*>(patientList->getHead());
+	int index = 1;
+	//use while loop to display until end of patientList
+	while (ptr != nullptr)
+	{
+		printf("%-10d|", index);
+		ptr->print();
+		ptr = dynamic_cast<Patient*>(ptr->getNext());
+		++index;
 	}
-	cout << line << endl;
+
+	std::cout << line << std::endl;
 }
 
 void DiagnosticModule::printMedicineList() {
-	using namespace std;
-	string line(50, '-');
-	const int MEDICINESIZE = medicineList->size();
+	Medicine* ptr = nullptr;
+	std::string line(50, '-');
 
-	cout << line << endl;
-	printf("%5s|%20s\n", "index", "medicine");
-	cout << line << endl;
-	for (int i = 0; i < MEDICINESIZE; ++i) {
-		Medicine* record = dynamic_cast<Medicine*>(medicineList->get(i));
-		printf("%-5d|%-20s\n", i + 1, record->getName());
+	printf("%-10s|%-20s\n", "Index", "Medicine Name");
+	std::cout << line << std::endl;
+
+	ptr = dynamic_cast<Medicine*>(medicineList->getHead());
+	int index = 1;
+	//use while loop to display until end of medicineList
+	while (ptr != nullptr)
+	{
+		printf("%-10d|", index);
+		ptr->print();
+		ptr = dynamic_cast<Medicine*>(ptr->getNext());
+		++index;
 	}
-	cout << line << endl;
+
+	std::cout << line << std::endl;
 }
 
 void DiagnosticModule::diagnose() {
-
 	int option = 0;
 	const int PATIENTSIZE = patientList->size();
 	const int DOCTORSIZE = doctorList->size();
 	const int MEDICINESIZE = medicineList->size();
 	bool functionLoop = true;
-	bool valid = true;
-
-	while (valid) {
-
-		printDoctorList();
-		int doctorIndex = InputModule::getIntegerInput("Enter your doctor_index:");
-
-		if (doctorIndex > DOCTORSIZE) {
-			std::cout << "Invalid index. Please try again." << std::endl;
-		}
-
-		else {
-			break;
-		}
-
-	}
+	int doctorIndex = 0;
 
 	do {
-		printPatientList();
-		int patientIndex = InputModule::getIntegerInput("Enter patient_index : ");
 
-		if (patientIndex == PATIENTSIZE + 1) {
+		printDoctorList();
+		doctorIndex = InputModule::getIntegerInput("Enter doctor index(0 to exit): ");
+
+		if (doctorIndex == 0) {
 			std::cout << "Returning to Diagnostic Module..." << std::endl;
 			functionLoop = false;
 		}
-		else if (patientIndex > 0 && patientIndex <= PATIENTSIZE) {
-			string description = "";
-			Patient* patient_ptr = dynamic_cast<Patient*>(patientList->get(patientIndex - 1));
-			patient_ptr->printDetail();
+		else if(doctorIndex > 0 && doctorIndex <= DOCTORSIZE){
+			Doctor* doctor_ptr = dynamic_cast<Doctor*>(doctorList->get(doctorIndex - 1));
+			bool selectPatient = true;
 
-			string illness = InputModule::getStringInput("Please enter patient's illness description:");
+			do {
+				printPatientList();
+				int patientIndex = InputModule::getIntegerInput("Enter patient index(0 to exit): ");
 
-			while (valid) {
+				if (patientIndex == 0) {
+					std::cout << "Returning to Doctor Selection Menu..." << std::endl;
+					selectPatient = false;
+				}
+				else if (patientIndex > 0 && patientIndex <= PATIENTSIZE) {
+					string description = "";
+					Patient* patient_ptr = dynamic_cast<Patient*>(patientList->get(patientIndex - 1));
+					patient_ptr->printDetail();
 
-				printMedicineList();
-				int medicineIndex = InputModule::getIntegerInput("Enter medicine_index:");
+					string illness = InputModule::getStringInput("Please enter patient's illness description:");
 
-				if (medicineIndex > MEDICINESIZE) {
+					bool selectMedicine = true;
+					int medicineIndex = 0;
+					Medicine* medicine_ptr = nullptr;
+					do {
+						printMedicineList();
+						medicineIndex = InputModule::getIntegerInput("Enter medicine index(0 if no medicine needed): ");
+
+						if (medicineIndex==0) {
+							selectMedicine = false;
+						}
+						else if (medicineIndex > 0 && medicineIndex <= MEDICINESIZE) {
+							medicine_ptr = dynamic_cast<Medicine*>(medicineList->get(medicineIndex - 1));
+							std::cout << "Medicine selected : " << medicine_ptr->getName() << std::endl;
+							selectMedicine = false;
+						}
+						else {
+							std::cout << "Invalid index. Please try again." << std::endl;
+						}
+					} while (selectMedicine);
+					
+					patient_ptr->setIllness(illness);
+					patient_ptr->setDoctorName(doctor_ptr->getName());
+					patient_ptr->setMedicine(medicine_ptr->getName());
+
+					std::cout << "Diagnose result entered sucessful" << std::endl;
+				}
+				else {
 					std::cout << "Invalid index. Please try again." << std::endl;
 				}
-
-				else {
-					break;
-				}
-
-			}
-			patient_ptr->setIllness(temp);
-			patient_ptr->setDoctorName(doctorList->get(doctorIndex));
-			Medicine* medicine_ptr = dynamic_cast<Medicine*>(medicineList->get(medicineIndex - 1));
-			patient_ptr->getMedicine().add(new Medicine(*medicine_ptr));
-
-			std::cout << "Data entered sucessful" << std::endl;
-			functionLoop = false;
-
-
+			} while (selectPatient);
 		}
 		else {
 			std::cout << "Invalid index. Please try again." << std::endl;
 		}
 	} while (functionLoop);
-
-
-
 
 }
 
@@ -130,9 +148,9 @@ void DiagnosticModule::checkDiagnose() {
 
 	do {
 		printPatientList();
-		int patientIndex = InputModule::getIntegerInput("Enter your patient_index : ");
+		int patientIndex = InputModule::getIntegerInput("Enter patient index(0 to exit): ");
 
-		if (patientIndex == PATIENTSIZE + 1) {
+		if (patientIndex == 0) {
 			std::cout << "Returning to Diagnostic Module..." << std::endl;
 			functionLoop = false;
 		}
