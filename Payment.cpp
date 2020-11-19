@@ -23,7 +23,7 @@ double Payment::getTotalPrice() { return totalPrice; }
 void Payment::setTotalPrice(double totalPrice) { this->totalPrice = totalPrice; }
 
 void Payment::print() {
-	printf("%-20s|%-15s", patient_name.c_str(), date.c_str());
+	printf("%-20s|%-15s\n", patient_name.c_str(), date.c_str());
 }
 
 void Payment::printDetail() {
@@ -43,5 +43,7 @@ std::string Payment::toString() {
 }
 
 bool Payment::operator <(Node& tmp) {
+	Payment p = dynamic_cast<Payment&>(tmp);
 
+	return this->id < p.id;
 }

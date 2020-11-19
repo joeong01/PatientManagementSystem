@@ -32,6 +32,7 @@ void Guardian::setGender(char gender) { this->gender = gender; }
 void Guardian::print() {
 
 }
+
 void Guardian::printDetail() {
 
 }
@@ -39,4 +40,10 @@ void Guardian::printDetail() {
 std::string Guardian::toString() {
 	return to_string(id) + ";" + to_string(age) + ";" + name + 
 		";" + address + ";" + contact + ";" + gender;
+}
+
+bool Guardian::operator < (Node& temp) {
+	Guardian g = dynamic_cast<Guardian&>(temp);
+
+	return this->id < g.id;
 }

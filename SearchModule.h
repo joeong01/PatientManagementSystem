@@ -1,23 +1,14 @@
 #pragma once
-#include "Module.h"
-#include "DiagnosticModule.h"
 #include "List.h"
+#include "Doctor.h"
+#include "Patient.h"
+#include "Medicine.h"
+#include "Guardian.h"
+#include "Payment.h"
 #include "InputModule.h"
-#include "HTMLExportationModule.h"
-#include "SearchModule.h"
-#include "DoctorManagementModule.h"
-#include "PatientManagementModule.h"
-#include "MedicineManagementModule.h"
-#include "PaymentModule.h"
-#include <iostream>
+#include "Module.h"
 
-/*
-    The main module of the patient management system which
-    will ask user to choose and direct the user to the module selected
-*/
-class MainModule :
-    public Module
-{
+class SearchModule : public Module{
 private:
     //the list of doctor record
     List* doctorList;
@@ -31,7 +22,7 @@ private:
     List* paymentList;
 public:
     /*
-        The constructor of Main Module
+        The constructor of Search Module
         called when enter this module.
         @param - pl : list of patient record
         @param - dl : list of doctor record
@@ -39,7 +30,14 @@ public:
         @param - gl : list of guardian record
         @param - payment : list of payment record
     */
-    MainModule(List* pl, List* dl, List* ml, List* gl, List* payment);
+    SearchModule(List* pl, List* dl, List* ml, List* gl, List* payment);
+
+    void searchDoctor();
+    void searchPatient();
+    void searchMedicine();
+    void searchGuardian();
+    void searchPayment();
+
     /*
         This method is used to display the main menu
         in the module to let the user to select the module entered

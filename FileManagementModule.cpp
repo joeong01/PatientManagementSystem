@@ -302,7 +302,7 @@ bool FileManagementModule::loadMedicine() {
 	return status;
 }
 
-//haven't done
+
 bool FileManagementModule::loadDoctor() {
 	bool status = true;
 	std::string input = "";
@@ -313,7 +313,28 @@ bool FileManagementModule::loadDoctor() {
 			while (!f.eof()) {
 				f >> input;
 				std::queue<std::string> part = InputModule::split_string(input);
-				Node* n = new Doctor();
+				if (part.size() != 9)
+					throw "Input Mismatch Exception";
+
+				int id = std::stoi(part.front());
+				part.pop();
+				std::string name = part.front();
+				part.pop();
+				int age = std::stoi(part.front());
+				part.pop();
+				char gender = part.front().at(0);
+				part.pop();
+				int experience_year = std::stoi(part.front());
+				part.pop();
+				std::string experience_field = part.front();
+				part.pop();
+				int consultant_extension = std::stoi(part.front());
+				part.pop();
+				double consultation_price = std::stod(part.front());
+				part.pop();
+				double monthly_salary = std::stod(part.front());
+
+				Node* n = new Doctor(id, name, age, gender, experience_year, experience_field, consultant_extension, consultation_price, monthly_salary);
 				doctorList->add(n);
 			}
 		}

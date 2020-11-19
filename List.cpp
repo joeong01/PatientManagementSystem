@@ -11,45 +11,80 @@ bool List::isEmpty() {
 }
 
 bool List::add(Node* n) {
-	if (this->isEmpty()) {
-		this->head = n;
-		this->tail = n;
+	bool result = true;
+	try {
+		if (this->isEmpty()) {
+			this->head = n;
+			this->tail = n;
+		}
+		else {
+			this->tail->setNext(n);
+			n->setPrev(this->tail);
+			this->tail = n;
+		}
+		++length;
 	}
-	else {
-		this->tail->setNext(n);
-		n->setPrev(this->tail);
-		this->tail = n;
+	catch (...) {
+		result = false;
 	}
-	++length;
+	return result;
 }
 
 bool List::insert(Node* n, int index) {
 	if (index<0 || index > length)
 		return false;
 
-	if (index == 0) {
-		Node* target = this->head;
-		target->setPrev(n);
-		this->head = target;
+	bool result = true;
+
+	try {
+		if (index == 0) {
+			Node* target = this->head;
+			target->setPrev(n);
+			this->head = target;
+		}
+		Node* prev = this->get(index - 1);
+		Node* next = this->get(index);
+		prev->setNext(n);
+		next->setPrev(n);
+
+		++length;
 	}
-	Node* prev = this->get(index-1);
-	Node* next = this->get(index);
-	prev->setNext(n);
-	next->setPrev(n);
-
-	++length;
-
+	catch (...) {
+		result = false;
+	}
+	return result;
 }
 
 bool List::remove(int index) {
 	if (index<0 || index > length) {
 		return false;
 	}
+
 	Node* target = this->get(index);
-	Node* prev = target->getPrev();
-	Node* next = target->getNext();
-	prev->setNext(next);
-	next->setPrev(prev);
+
+	if (length == 1) {
+		head = nullptr;
+		tail = nullptr;
+	}
+	else {
+		if (index == 0) {
+				Node* next = target->getNext();
+				next->setPrev(nullptr);
+				this->head = next;
+			}
+			else if (index == length - 1) {
+				Node* prev = target->getPrev();
+				prev->setNext(nullptr);
+				this->tail = prev;
+			}
+			else {
+				Node* prev = target->getPrev();
+				Node* next = target->getNext();
+				prev->setNext(next);
+				next->setPrev(prev);
+			}
+	}
+	
 	delete target;
 	--length;
 
@@ -112,18 +147,23 @@ bool List::swap(int n1, int n2) {
 bool List::sort() {
 	bool sorted = true;
 
-	for (int i = 0; i < length-1; ++i) {
-		sorted = true;
-		for (int j = i; j < length-1; ++j) {
-			if (this->get(j) > this->get(j + 1)) {
-				this->swap(j, j+1);
-				sorted = false;
+	try {
+		for (int i = 0; i < length - 1; ++i) {
+			sorted = true;
+			for (int j = i; j < length - 1; ++j) {
+				if (!(this->get(j) < this->get(j + 1))) {
+					this->swap(j, j + 1);
+					sorted = false;
+				}
 			}
+			if (sorted)
+				break;
 		}
-		if (sorted)
-			break;
+		return true;
 	}
-	return true;
+	catch (...) {
+		return false;
+	}
 }
 
 Node* List::get(int index) {

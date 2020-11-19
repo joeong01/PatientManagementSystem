@@ -12,6 +12,8 @@ class Node : public Printable
 	Node* prev;
 
 public:
+	Node();
+
 	Node* getNext();
 	Node* getPrev();
 

@@ -17,6 +17,27 @@ private:
 		The size of character ignored if invalid input is caught
 	*/
 	const static int ignoreSize = 1024;
+
+	/*
+		This method will accept a string input and remove all the spacing before the string
+		@param - str : the string to remove the spacing
+		@return - the string after remove the spacing in the beginning
+	*/
+	static std::string trimFront(std::string& str);
+
+	/*
+		This method will accept a string input and remove all the spacing after the string
+		@param - str : the string to remove the spacing
+		@return - the string after remove the spacing in the ending
+	*/
+	static std::string trimBack(std::string& str);
+
+	/*
+		This method will accept a string input and remove all the spacing before and after the string
+		@param - str : the string to remove the spacing
+		@return - the string after remove the spacing in the beginning and ending
+	*/
+	static std::string trim(std::string& str);
 public:
 	/*
 		This method is used to get the integer input from the user.
