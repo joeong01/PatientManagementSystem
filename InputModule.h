@@ -18,26 +18,6 @@ private:
 	*/
 	const static int ignoreSize = 1024;
 
-	/*
-		This method will accept a string input and remove all the spacing before the string
-		@param - str : the string to remove the spacing
-		@return - the string after remove the spacing in the beginning
-	*/
-	static std::string trimFront(std::string& str);
-
-	/*
-		This method will accept a string input and remove all the spacing after the string
-		@param - str : the string to remove the spacing
-		@return - the string after remove the spacing in the ending
-	*/
-	static std::string trimBack(std::string& str);
-
-	/*
-		This method will accept a string input and remove all the spacing before and after the string
-		@param - str : the string to remove the spacing
-		@return - the string after remove the spacing in the beginning and ending
-	*/
-	static std::string trim(std::string& str);
 public:
 	/*
 		This method is used to get the integer input from the user.
@@ -73,5 +53,26 @@ public:
 		@return - the queue with splited strings based on the deliminater of ';'
 	*/
 	static std::queue<std::string> split_string(std::string input,const char delimiter = ';');
+
+	/*
+		This method will accept a string input and remove all the spacing before the string
+		@param - str : the string to remove the spacing
+		@return - the string after remove the spacing in the beginning
+	*/
+	static std::string trimFront(std::string& str);
+
+	/*
+		This method will accept a string input and remove all the spacing after the string
+		@param - str : the string to remove the spacing
+		@return - the string after remove the spacing in the ending
+	*/
+	static std::string trimBack(std::string& str);
+
+	/*
+		This method will accept a string input and remove all the spacing before and after the string
+		@param - str : the string to remove the spacing
+		@return - the string after remove the spacing in the beginning and ending
+	*/
+	static std::string trim(std::string& str);
 };
 

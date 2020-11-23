@@ -46,7 +46,6 @@ bool FileManagementModule::savePatient() {
 	try {
 		std::ofstream f("patient.dat", std::ios::binary);
 		if (f) {
-			f << patientList->size() << std::endl;
 			if (!patientList->isEmpty()) {
 				Node* tmp = patientList->getHead();
 				while (tmp != nullptr) {
@@ -73,7 +72,6 @@ bool FileManagementModule::saveGuardian() {
 	try {
 		std::ofstream f("guardian.dat", std::ios::binary);
 		if (f) {
-			f << guardianList->size() << std::endl;
 			if (!guardianList->isEmpty()) {
 				Node* tmp = guardianList->getHead();
 				while (tmp != nullptr) {
@@ -100,7 +98,6 @@ bool FileManagementModule::saveMedicine() {
 	try {
 		std::ofstream f("medicine.dat", std::ios::binary);
 		if (f) {
-			f << medicineList->size() << std::endl;
 			if (!medicineList->isEmpty()) {
 				Node* tmp = medicineList->getHead();
 				while (tmp != nullptr) {
@@ -127,7 +124,6 @@ bool FileManagementModule::saveDoctor() {
 	try {
 		std::ofstream f("doctor.dat", std::ios::binary);
 		if (f) {
-			f << doctorList->size() << std::endl;
 			if (!doctorList->isEmpty()) {
 				Node* tmp = doctorList->getHead();
 				while (tmp != nullptr) {
@@ -154,7 +150,6 @@ bool FileManagementModule::savePayment() {
 	try {
 		std::ofstream f("payment.dat", std::ios::binary);
 		if (f) {
-			f << paymentList->size() << std::endl;
 			if (!paymentList->isEmpty()) {
 				Node* tmp = paymentList->getHead();
 				while (tmp != nullptr) {
@@ -184,7 +179,8 @@ bool FileManagementModule::loadPatient() {
 		std::ifstream f("patient.dat", std::ios::binary);
 		if (f) {
 			while (!f.eof()) {
-				f >> input;
+				std::getline(f, input);
+				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 9) {
 					throw "Input Mismatch Exception";
@@ -214,7 +210,7 @@ bool FileManagementModule::loadPatient() {
 		else {
 			throw("Failed to open the patient data file");
 		}
-		patientList->sort();
+		if(patientList->size()>1) patientList->sort();
 		f.close();
 	}
 	catch (std::string& msg) {
@@ -233,7 +229,8 @@ bool FileManagementModule::loadGuardian() {
 		std::ifstream f("guardian.dat", std::ios::binary);
 		if (f) {
 			while (!f.eof()) {
-				f >> input;
+				std::getline(f, input);
+				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 6)
 					throw "Input Mismatch Exception";
@@ -255,7 +252,7 @@ bool FileManagementModule::loadGuardian() {
 		else {
 			throw("Failed to open the guardian data file");
 		}
-		guardianList->sort();
+		if (guardianList->size() > 1) guardianList->sort();
 		f.close();
 	}
 	catch (std::string& msg) {
@@ -274,7 +271,8 @@ bool FileManagementModule::loadMedicine() {
 		std::ifstream f("medicine.dat", std::ios::binary);
 		if (f) {
 			while (!f.eof()) {
-				f >> input;
+				std::getline(f, input);
+				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 3)
 					throw "Input Mismatch Exception";
@@ -291,7 +289,7 @@ bool FileManagementModule::loadMedicine() {
 		else {
 			throw("Failed to open the medicine data file");
 		}
-		medicineList->sort();
+		if (medicineList->size() > 1) medicineList->sort();
 		f.close();
 	}
 	catch (std::string& msg) {
@@ -311,7 +309,8 @@ bool FileManagementModule::loadDoctor() {
 		std::ifstream f("doctor.dat", std::ios::binary);
 		if (f) {
 			while (!f.eof()) {
-				f >> input;
+				std::getline(f,input);
+				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 9)
 					throw "Input Mismatch Exception";
@@ -341,7 +340,7 @@ bool FileManagementModule::loadDoctor() {
 		else {
 			throw("Failed to open the doctor data file");
 		}
-		doctorList->sort();
+		if (doctorList->size() > 1) doctorList->sort();
 		f.close();
 	}
 	catch (std::string& msg) {
@@ -360,7 +359,8 @@ bool FileManagementModule::loadPayment() {
 		std::ifstream f("payment.dat", std::ios::binary);
 		if (f) {
 			while (!f.eof()) {
-				f >> input;
+				std::getline(f, input);
+				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 4)
 					throw "Input Mismatch Exception";
@@ -379,7 +379,7 @@ bool FileManagementModule::loadPayment() {
 		else {
 			throw("Failed to open the payment data file");
 		}
-		paymentList->sort();
+		if (paymentList->size() > 1) paymentList->sort();
 		f.close();
 	}
 	catch (std::string& msg) {

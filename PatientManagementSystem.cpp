@@ -12,16 +12,18 @@ int main(int argc, char** argv)
 	List* guardianList = new List();
 	List* paymentList = new List();
 
+	
 	f = new FileManagementModule(
 			doctorList,
 			patientList,
-			medicineList,
 			guardianList,
+			medicineList,
 			paymentList,
 			FileManagementModule::READMODE
 		);
 	
 	delete f;
+	
 
 	MainModule m(patientList,doctorList,medicineList,guardianList,paymentList);
 
@@ -34,8 +36,8 @@ int main(int argc, char** argv)
 	f = new FileManagementModule(
 		doctorList,
 		patientList,
-		medicineList,
 		guardianList,
+		medicineList,
 		paymentList,
 		FileManagementModule::WRITEMODE
 	);

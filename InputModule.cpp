@@ -93,8 +93,6 @@ std::string InputModule::getStringInput(std::string prompt) {
 			}
 			if (trim(input).length() == 0)
 				throw "Input should contain at least one character.";
-
-			std::cin.ignore(ignoreSize, '\n');
 			valid = true;
 		}
 		catch (std::string& msg) {
@@ -137,8 +135,11 @@ std::queue<std::string> InputModule::split_string(std::string input,const char d
 
 	while (start < length) {
 		end = input.find(delimiter, start);
-		part.push(input.substr(start, end - start));
-		start = end + 1;
+		if (end <= start) { part.push(input.substr(start, length-start)); start = length; }
+		else {
+			part.push(input.substr(start, end - start));
+			start = end + 1;
+		}
 	}
 
 	return part;

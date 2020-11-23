@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
 #include "List.h"
-#include "Medicine.h"
-#include "Doctor.h"
 using namespace std;
 
 /*
