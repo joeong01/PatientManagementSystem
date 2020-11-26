@@ -47,15 +47,12 @@ void PatientManagementModule::addPatient()
     age = InputModule::getIntegerInput("Enter Patient Age: ");
     address = InputModule::getStringInput("Enter Patient Address: ");
     contact = InputModule::getStringInput("Enter Patient Contact: ");
-    illness = InputModule::getStringInput("Enter Patient Illness: ");
     insurance = InputModule::getCharInput("Patient has Insurance (Y/N): ");
-    doctor_Name = InputModule::getIntegerInput("Enter Patient's Doctor Name: ");
-    medicine_Name = InputModule::getIntegerInput("Enter Medicine Name: ");
     int gId = InputModule::getIntegerInput("Enter Guardian ID: ");
     string gName = InputModule::getStringInput("Enter Guardian Name: ");
     int gAge = InputModule::getIntegerInput("Enter Guardian Age: ");
     bool gGender = InputModule::getCharInput("Enter Guardian Gender: ");
-    string gAddress = InputModule::getStringInput("Enter Guardian Illness: ");
+    string gAddress = InputModule::getStringInput("Enter Guardian Address: ");
     string gContact = InputModule::getStringInput("Enter Guardian Contact: ");
 
     Node* patient = new Patient(id, age, name, address, contact, illness, insurance, doctor_Name, medicine_Name);

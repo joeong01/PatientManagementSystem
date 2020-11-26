@@ -15,7 +15,7 @@ void MainModule::printMainMenu() {
 	cout << "1 -> Patient Management Module" << endl;
 	cout << "2 -> Doctor Management Module" << endl;
 	cout << "3 -> Medicine Management Module" << endl;
-	cout << "4 -> Diagnotic Module" << endl;
+	cout << "4 -> Diagnostic Module" << endl;
 	cout << "5 -> Payment Module" << endl;
 	cout << "6 -> Search Module" << endl;
 	cout << "7 -> Export Record" << endl;
