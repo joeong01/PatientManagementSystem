@@ -41,7 +41,7 @@ int InputModule::getIntegerInput(std::string prompt){
 			if (std::cin.fail()) {
 				std::cin.clear();
 				std::cin.ignore(ignoreSize, '\n');
-				throw "The input should be integer value. ";
+				throw std::string("The input should be integer value. ");
 			}
 			std::cin.ignore(ignoreSize, '\n');
 			valid = true;
@@ -65,7 +65,7 @@ char InputModule::getCharInput(std::string prompt) {
 			if (std::cin.fail()) {
 				std::cin.clear();
 				std::cin.ignore(ignoreSize, '\n');
-				throw "The input should be character value. ";
+				throw std::string("The input should be character value. ");
 			}
 			std::cin.ignore(ignoreSize, '\n');
 			valid = true;
@@ -89,10 +89,10 @@ std::string InputModule::getStringInput(std::string prompt) {
 			if (std::cin.fail()) {
 				std::cin.clear();
 				std::cin.ignore(ignoreSize, '\n');
-				throw "Failed to catch input";
+				throw std::string("Failed to catch input");
 			}
 			if (trim(input).length() == 0)
-				throw "Input should contain at least one character.";
+				throw std::string("Input should contain at least one character.");
 			valid = true;
 		}
 		catch (std::string& msg) {
@@ -114,7 +114,7 @@ double InputModule::getDoubleInput(std::string prompt) {
 			if (std::cin.fail()) {
 				std::cin.clear();
 				std::cin.ignore(ignoreSize, '\n');
-				throw "The input should be double value. ";
+				throw std::string("The input should be double value. ");
 			}
 			std::cin.ignore(ignoreSize, '\n');
 			valid = true;

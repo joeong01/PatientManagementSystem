@@ -68,7 +68,7 @@ bool HTMLExportationModule::exportPatient(){
 			f << this->htmlEnd;
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -98,7 +98,7 @@ bool HTMLExportationModule::exportGuardian(){
 			f << this->htmlEnd;
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -128,7 +128,7 @@ bool HTMLExportationModule::exportMedicine(){
 			f << this->htmlEnd;
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -169,7 +169,7 @@ bool HTMLExportationModule::exportDoctor(){
 			f << this->htmlEnd;
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -199,7 +199,7 @@ bool HTMLExportationModule::exportPayment(){
 			f << this->htmlEnd;
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}

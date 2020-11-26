@@ -11,28 +11,28 @@ FileManagementModule::FileManagementModule(List* dl, List* pl, List* gl, List* m
 		case READMODE:
 		{
 			status = loadPatient();
-			if (!status) throw "Failed to load patient data";
+			if (!status) throw std::string("Failed to load patient data");
 			status = loadGuardian();
-			if (!status) throw "Failed to load guardian data";
+			if (!status) throw std::string("Failed to load guardian data");
 			status = loadMedicine();
-			if (!status) throw "Failed to load medicine data";
+			if (!status) throw std::string("Failed to load medicine data");
 			status = loadDoctor();
-			if (!status) throw "Failed to load doctor data";
+			if (!status) throw std::string("Failed to load doctor data");
 			status = loadPayment();
-			if (!status) throw "Failed to load payment data";
+			if (!status) throw std::string("Failed to load payment data");
 		}
 		case WRITEMODE:
 		{
 			status = savePatient();
-			if (!status) throw "Failed to save patient data";
+			if (!status) throw std::string("Failed to save patient data");
 			status = saveGuardian();
-			if (!status) throw "Failed to save guardian data";
+			if (!status) throw std::string("Failed to save guardian data");
 			status = saveMedicine();
-			if (!status) throw "Failed to save medicine data";
+			if (!status) throw std::string("Failed to save medicine data");
 			status = saveDoctor();
-			if (!status) throw "Failed to save doctor data";
+			if (!status) throw std::string("Failed to save doctor data");
 			status = savePayment();
-			if (!status) throw "Failed to save payment data";
+			if (!status) throw std::string("Failed to save payment data");
 		}
 		}
 	}
@@ -55,7 +55,7 @@ bool FileManagementModule::savePatient() {
 			}
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -81,7 +81,7 @@ bool FileManagementModule::saveGuardian() {
 			}
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -107,7 +107,7 @@ bool FileManagementModule::saveMedicine() {
 			}
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -133,7 +133,7 @@ bool FileManagementModule::saveDoctor() {
 			}
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -159,7 +159,7 @@ bool FileManagementModule::savePayment() {
 			}
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		f.close();
 	}
@@ -183,7 +183,7 @@ bool FileManagementModule::loadPatient() {
 				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 9) {
-					throw "Input Mismatch Exception";
+					throw std::string("Input Mismatch Exception");
 				}
 				int id = std::stoi(part.front());
 				part.pop();
@@ -208,7 +208,7 @@ bool FileManagementModule::loadPatient() {
 			}
 		}
 		else {
-			throw("Failed to open the patient data file");
+			throw std::string("Failed to open the patient data file");
 		}
 		if(patientList->size()>1) patientList->sort();
 		f.close();
@@ -233,7 +233,7 @@ bool FileManagementModule::loadGuardian() {
 				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 6)
-					throw "Input Mismatch Exception";
+					throw std::string("Input Mismatch Exception");
 				int id = std::stoi(part.front());
 				part.pop();
 				int age = std::stoi(part.front());
@@ -250,7 +250,7 @@ bool FileManagementModule::loadGuardian() {
 			}
 		}
 		else {
-			throw("Failed to open the guardian data file");
+			throw std::string("Failed to open the guardian data file");
 		}
 		if (guardianList->size() > 1) guardianList->sort();
 		f.close();
@@ -275,7 +275,7 @@ bool FileManagementModule::loadMedicine() {
 				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 3)
-					throw "Input Mismatch Exception";
+					throw std::string("Input Mismatch Exception");
 				int id = std::stoi(part.front());
 				part.pop();
 				std::string name = part.front();
@@ -287,7 +287,7 @@ bool FileManagementModule::loadMedicine() {
 			}
 		}
 		else {
-			throw("Failed to open the medicine data file");
+			throw std::string("Failed to open the medicine data file");
 		}
 		if (medicineList->size() > 1) medicineList->sort();
 		f.close();
@@ -313,7 +313,7 @@ bool FileManagementModule::loadDoctor() {
 				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 9)
-					throw "Input Mismatch Exception";
+					throw std::string("Input Mismatch Exception");
 
 				int id = std::stoi(part.front());
 				part.pop();
@@ -338,7 +338,7 @@ bool FileManagementModule::loadDoctor() {
 			}
 		}
 		else {
-			throw("Failed to open the doctor data file");
+			throw std::string("Failed to open the doctor data file");
 		}
 		if (doctorList->size() > 1) doctorList->sort();
 		f.close();
@@ -363,7 +363,7 @@ bool FileManagementModule::loadPayment() {
 				if (input.length() == 0) break;
 				std::queue<std::string> part = InputModule::split_string(input);
 				if (part.size() != 4)
-					throw "Input Mismatch Exception";
+					throw std::string("Input Mismatch Exception");
 				int id = std::stoi(part.front());
 				part.pop();
 				std::string patient_name = part.front();
@@ -377,7 +377,7 @@ bool FileManagementModule::loadPayment() {
 			}
 		}
 		else {
-			throw("Failed to open the payment data file");
+			throw std::string("Failed to open the payment data file");
 		}
 		if (paymentList->size() > 1) paymentList->sort();
 		f.close();

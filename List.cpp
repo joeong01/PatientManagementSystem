@@ -1,4 +1,5 @@
 #include "List.h"
+#include <iostream>
 
 List::List() {
 	this->head = nullptr;
@@ -18,11 +19,12 @@ bool List::add(Node* n) {
 			this->tail = n;
 		}
 		else {
-			this->tail->setNext(n);
 			n->setPrev(this->tail);
+			this->tail->setNext(n);
 			this->tail = n;
 		}
 		++length;
+		std::cout << length << std::endl;
 	}
 	catch (...) {
 		result = false;
@@ -95,10 +97,12 @@ bool List::swap(int n1, int n2) {
 	Node* node1 = nullptr;
 	Node* node2 = nullptr;
 
+	//check range
 	if (n1<0 || n2<0 || n1 > length || n2 > length) {
 		return false;
 	}
 
+	//assign node1 and node2 so that index node1 always less than node2
 	if (n1 > n2) {
 		node1 = this->get(n2);
 		node2 = this->get(n1);
@@ -108,37 +112,42 @@ bool List::swap(int n1, int n2) {
 		node2 = this->get(n2);
 	}
 
+	Node* beforeNode1 = node1->getPrev();
+	Node* afterNode1 = node1->getNext();
+
 	Node* beforeNode2 = node2->getPrev();
 	Node* afterNode2 = node2->getNext();
+	
+	//check if node1 and node2 is head or tail
+	if (node1 == head)
+		head = node2;
 
-	if (node1 == this->head) {
-		Node* afterNode1 = node1->getNext();
-		afterNode1->setPrev(node2);
-		node2->setNext(afterNode1);
-		node2->setPrev(nullptr);
-		this->head = node2;
-	}
-	else {
-		Node* beforeNode1 = node1->getPrev();
-		Node* afterNode1 = node1->getNext();
+	if (node2 == tail)
+		tail == node1;
 
+	//change the pointer before and after the node 1 to node 2
+	if (beforeNode1 != nullptr)
 		beforeNode1->setNext(node2);
+	if (afterNode1 != node2)
 		afterNode1->setPrev(node2);
-		node2->setNext(afterNode1);
-		node2->setPrev(beforeNode1);
-	}
 
-	if (afterNode2 == nullptr) {
+	//change the pointer before and after the node 2 to node 1
+	if (afterNode2 != nullptr)
+		afterNode2->setPrev(node1);
+	if (beforeNode2 != node1)
 		beforeNode2->setNext(node1);
-		node1->setNext(nullptr);
-		node1->setPrev(beforeNode2);
-		this->tail = node1;
+	
+	//change the pointer of node 1 and node 2
+	node1->setNext(afterNode2);
+	node2->setPrev(beforeNode1);
+
+	if (beforeNode2 == node1) {
+		node1->setPrev(node2);
+		node2->setNext(node1);
 	}
 	else {
-		beforeNode2->setNext(node1);
-		afterNode2->setPrev(node1);
-		node1->setNext(afterNode2);
 		node1->setPrev(beforeNode2);
+		node2->setNext(afterNode1);
 	}
 
 	return true;

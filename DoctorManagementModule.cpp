@@ -40,6 +40,7 @@ void DoctorManagementModule::printDoctorTable()
 		ptr->print();
 		ptr = dynamic_cast<Doctor*>(ptr->getNext());
 		++index;
+
 	}
 
 	std::cout << line << std::endl;
