@@ -44,11 +44,12 @@ bool List::insert(Node* n, int index) {
 			target->setPrev(n);
 			this->head = target;
 		}
-		Node* prev = this->get(index - 1);
-		Node* next = this->get(index);
-		prev->setNext(n);
-		next->setPrev(n);
-
+		else{
+			Node* prev = this->get(index - 1);
+			Node* next = this->get(index);
+			prev->setNext(n);
+			next->setPrev(n);
+		}
 		++length;
 	}
 	catch (...) {
