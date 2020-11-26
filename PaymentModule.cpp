@@ -46,7 +46,8 @@ void PaymentModule::makePayment() {
 			functionLoop = false;
 		}
 		else if (index > 0 && index <= PATIENTSIZE) {
-			Patient* patient = nullptr;
+			int id = InputModule::getIntegerInput("Enter Payment Id : ");
+			Patient* patient = dynamic_cast<Patient*>(patientList->get(index));
 
 			std::string name = patient->getName();
 			double total_price = calculateTotalPrice(patient);
@@ -54,7 +55,8 @@ void PaymentModule::makePayment() {
 			//get the current date and time
 			time_t rawtime;
 			time(&rawtime);
-			std::string date = ctime(&rawtime);
+			char* date = new char[30];
+			ctime_s(date,30,&rawtime);
 
 			//create new constructor
 			paymentList->add(new Payment(id, name, date, total_price));

@@ -60,24 +60,34 @@ void MainModule::mainProcess(int input) {
 	break;
 	case 4:
 	{
-		DiagnosticModule dm(doctorList,patientList,medicineList);
+		if (patientList->isEmpty() || doctorList->isEmpty()) {
+			std::cout << "You cannot enter payment module without patient or doctor data." << std::endl;
+		}
+		else {
+			DiagnosticModule dm(doctorList, patientList, medicineList);
 
-		do {
-			dm.printMainMenu();
-			int choice = InputModule::getIntegerInput("Your option : ");
-			dm.mainProcess(choice);
-		} while (dm.isContinue());
+			do {
+				dm.printMainMenu();
+				int choice = InputModule::getIntegerInput("Your option : ");
+				dm.mainProcess(choice);
+			} while (dm.isContinue());
+		}
 	}
 	break;
 	case 5:
 	{
-		PaymentModule pm(patientList, medicineList, doctorList);
+		if (patientList->isEmpty()) {
+			std::cout << "You cannot enter payment module without any patient data." << std::endl;
+		}
+		else {
+			PaymentModule pm(patientList, medicineList, doctorList, paymentList);
 
-		do {
-			pm.printMainMenu();
-			int choice = InputModule::getIntegerInput("Your option : ");
-			pm.mainProcess(choice);
-		} while (pm.isContinue());
+			do {
+				pm.printMainMenu();
+				int choice = InputModule::getIntegerInput("Your option : ");
+				pm.mainProcess(choice);
+			} while (pm.isContinue());
+		}
 	}
 	break;
 	case 6:
